@@ -540,6 +540,9 @@ button:hover {
 
 /* dashboard */
 @media (max-width: 1300px) {
+  .courses_container {
+    grid-template-columns: repeat(3, 1fr);
+  }
   :root {
     --items-count: 2;
   }
@@ -564,6 +567,9 @@ button:hover {
 }
 
 @media (max-width: 950px) {
+  .courses_container {
+    grid-template-columns: repeat(2, 1fr);
+  }
   :root {
     --items-count: 1;
   }
@@ -711,6 +717,12 @@ button:hover {
 }
 
 @media (max-width: 550px) {
+  .form-container {
+    max-width: 250px;
+}
+  .courses_container {
+    grid-template-columns: repeat(1, 1fr);
+  }
   .header_part_2 > .header_text {
     font-size: 2.5rem;
   }
