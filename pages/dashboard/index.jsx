@@ -1,0 +1,288 @@
+import React, { useEffect, useState } from "react";
+import { ToastContainer, toast, Bounce } from "react-toastify";
+
+const Dashboard = () => {
+  const getCreatorCount = async () => {
+    const resjson = await fetch("/api/creator");
+    const res = await resjson.json();
+    if (!res.error) return res.length;
+    else return -1;
+  };
+  const getRequestsCount = async () => {
+    const resjson = await fetch("/api/request");
+    const res = await resjson.json();
+    if (!res.error) return res.length;
+    else return -1;
+  };
+
+  const [data, setData] = useState([
+    {
+      left: "creators",
+      right: <i class="bx bxs-business"></i>,
+      value: 0,
+    },
+    {
+      left: "form requests",
+      right: <i class="bx bx-user-plus"></i>,
+      value: 0,
+    },
+    {
+      left: "money Paid",
+      right: <i class="bx bx-money-withdraw"></i>,
+      value: 0,
+    },
+    {
+      left: "money Pinned",
+      right: <i class="bx bxs-wallet"></i>,
+      value: 0,
+    },
+  ]);
+
+  const [newAffiliate, setNewAffiliate] = useState({
+    username: "",
+    email: "",
+    password: "",
+    startDate: "",
+    endDate: "",
+  });
+
+  const [totalCreators, setTotalCreators] = useState([]);
+
+  const [totalRequest, setTotalRequests] = useState([]);
+
+  const updateNewAffiliate = (e) => {
+    setNewAffiliate({ ...newAffiliate, [e.target.name]: e.target.value });
+  };
+
+  const addNewCreator = async (
+    username,
+    email,
+    password,
+    startDate,
+    endDate
+  ) => {
+    const resjson = await fetch("/api/creator", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        username,
+        email,
+        password,
+        startDate,
+        endDate,
+      }),
+    });
+    return await resjson.json();
+  };
+
+  const getTotalCreators = async () => {
+    const resjson = await fetch("/api/creator");
+    return await resjson.json();
+  };
+
+  const getTotalRequests = async () => {
+    const resjson = await fetch("/api/request");
+    return await resjson.json();
+  };
+
+  useEffect(() => {
+    (async () => {
+      // creators count
+      const creatorscount = await getCreatorCount();
+      setData((oldata) => {
+        const copy = [...oldata];
+        copy[0].value = creatorscount;
+        return copy;
+      });
+      //clients count
+      const requestscount = await getRequestsCount();
+      setData((oldata) => {
+        const copy = [...oldata];
+        copy[1].value = requestscount;
+        return copy;
+      });
+      // total creators
+      const total_creators = await getTotalCreators();
+      if (!total_creators.error) {
+        setTotalCreators(total_creators);
+        console.log({ total_creators });
+      }
+      // total requests
+      const total_requests = await getTotalRequests();
+      if (!total_requests.error) {
+        setTotalRequests(total_requests);
+        console.log({ total_requests });
+      }
+    })();
+  }, []);
+  return (
+    <section className="dashboard_container">
+      <ToastContainer />
+      <section className="first_section">
+        {data.map((value, index) => (
+          <div className="data_section">
+            <div className="left_icon">{value.left}</div>
+            <div className="right_icon">{value.right}</div>
+            {value.value}
+          </div>
+        ))}
+      </section>
+      <section className="second_section">
+        <div className="data_section one">
+          <h1 className="table_title">Total Affiliates</h1>
+          <div className="table_heading">
+            <div>USER NAME</div>
+            <div>EMAIL</div>
+            <div>START DATE</div>
+            <div>END DATE</div>
+          </div>
+          {totalCreators.map((value) => (
+            <div>
+              <div className="table_item">{value.username}</div>
+              <div className="table_item">{value.email}</div>
+              <div className="table_item">
+                {value.startDate
+                  ? new Date(value.startDate).toDateString()
+                  : ""}
+              </div>
+              <div className="table_item">
+                {value.endDate ? new Date(value.endDate).toDateString() : ""}
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="data_section two">
+          <h1 className="table_title">Total Requests</h1>
+          <div className="table_heading">
+            <div>client username</div>
+            <div>creator username</div>
+            <div>course id</div>
+          </div>
+          {totalRequest.map((value) => (
+            <div>
+              <div className="table_item">{value.user_id}</div>
+              <div className="table_item">{value.creator_id}</div>
+              <div className="table_item">{value.affiliate_id}</div>
+            </div>
+          ))}
+        </div>
+        <div className="data_section">
+          <h1 className="form_heading">Add New Affiliate</h1>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              addNewCreator(
+                newAffiliate.username,
+                newAffiliate.email,
+                newAffiliate.password,
+                newAffiliate.startDate,
+                newAffiliate.endDate
+              )
+                .then((e) => {
+                  console.log({ e });
+                  if (e.error) {
+                    toast.error(e.error, {
+                      position: "top-right",
+                      autoClose: 5000,
+                      hideProgressBar: false,
+                      closeOnClick: false,
+                      pauseOnHover: true,
+                      draggable: true,
+                      progress: undefined,
+                      theme: "light",
+                      transition: Bounce,
+                    });
+                  } else {
+                    toast.success("added affiliate successfully", {
+                      position: "top-right",
+                      autoClose: 2000,
+                      hideProgressBar: false,
+                      closeOnClick: false,
+                      pauseOnHover: true,
+                      draggable: true,
+                      progress: undefined,
+                      theme: "light",
+                      transition: Bounce,
+                    });
+                  }
+                })
+                .catch((error) => {
+                  toast.error("Something went wrong!", {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                    transition: Bounce,
+                  });
+                });
+            }}
+            action="#"
+          >
+            <div className="input_field">
+              <label htmlFor="username">UserName: </label>
+              <input
+                onChange={updateNewAffiliate}
+                value={newAffiliate.username}
+                type="text"
+                name="username"
+                id="username"
+                required
+              />
+            </div>
+            <div className="input_field">
+              <label htmlFor="email">Email: </label>
+              <input
+                onChange={updateNewAffiliate}
+                value={newAffiliate.email}
+                type="text"
+                name="email"
+                id="email"
+                required
+              />
+            </div>
+            <div className="input_field">
+              <label htmlFor="password">Password: </label>
+              <input
+                required
+                onChange={updateNewAffiliate}
+                value={newAffiliate.password}
+                type="password"
+                name="password"
+                id="password"
+              />
+            </div>
+            <div className="input_field">
+              <label htmlFor="startDate">Start Date: </label>
+              <input
+                required
+                onChange={updateNewAffiliate}
+                value={newAffiliate.startDate}
+                type="date"
+                name="startDate"
+                id="startDate"
+              />
+            </div>
+            <div className="input_field">
+              <label htmlFor="endDate">End Date: </label>
+              <input
+                required
+                onChange={updateNewAffiliate}
+                value={newAffiliate.endDate}
+                type="date"
+                name="endDate"
+                id="endDate"
+              />
+            </div>
+            <button type="submit">Add</button>
+          </form>
+        </div>
+      </section>
+    </section>
+  );
+};
+
+export default Dashboard;
