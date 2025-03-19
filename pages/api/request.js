@@ -31,8 +31,8 @@ export default async function handler(req, res) {
   if (req.method === "POST") {
     try {
       const { user_id, course_id, affiliate_id } = req.body;
-      if (!user_id || !affiliate_id) {
-        return res.status(400).json({ error: "User ID and affiliate ID are required" });
+      if (!user_id || !course_id) {
+        return res.status(400).json({ error: "User id and course id is required" });
       }
       const newRequest = await RequestModel.create({ user_id, course_id, affiliate_id });
       return res.status(201).json(newRequest);

@@ -31,11 +31,11 @@ export default async function handler(req, res) {
    * ----------------------------------------- */
   if (req.method === "POST") {
     try {
-      const { username, title, description } = req.body;
-      if (!username || !title || !description) {
+      const { title, description } = req.body;
+      if (!title || !description) {
         return res.status(400).json({ error: "All fields are required" });
       }
-      const newCourse = await CourseModel.create({ username, title, description });
+      const newCourse = await CourseModel.create({ name, title, description });
       return res.status(201).json(newCourse);
     } catch (error) {
       return res.status(500).json({ error: "Failed to create course" });
@@ -62,9 +62,12 @@ export default async function handler(req, res) {
     try {
       const { title, description } = req.body;
       const updatedCourse = await CourseModel.findByIdAndUpdate(
-        id, { title, description }, { new: true }
+        id,
+        { title, description },
+        { new: true }
       );
-      if (!updatedCourse) return res.status(404).json({ error: "Course not found" });
+      if (!updatedCourse)
+        return res.status(404).json({ error: "Course not found" });
       return res.status(200).json(updatedCourse);
     } catch (error) {
       return res.status(500).json({ error: "Failed to update course" });
@@ -77,7 +80,8 @@ export default async function handler(req, res) {
   if (req.method === "DELETE" && id) {
     try {
       const deletedCourse = await CourseModel.findByIdAndDelete(id);
-      if (!deletedCourse) return res.status(404).json({ error: "Course not found" });
+      if (!deletedCourse)
+        return res.status(404).json({ error: "Course not found" });
       return res.status(200).json({ message: "Course deleted successfully" });
     } catch (error) {
       return res.status(500).json({ error: "Failed to delete course" });

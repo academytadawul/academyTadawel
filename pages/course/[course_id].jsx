@@ -5,9 +5,12 @@ import { ToastContainer, toast, Bounce } from "react-toastify";
 
 const CoursePage = () => {
   const router = useRouter();
-  const { course_id, affiliate_id } = router.query;
+  const { course_id, affiliate_id, course_title } = router.query;
+  useEffect(() => {
+    console.log({ course_title });
+  }, [course_title]);
   const [formData, setFormData] = useState({
-    course_name: course_id ? course_id : 0,
+    course_name: course_title ? course_title : 0,
     name: "",
     email: "",
     phonenumber: "",
@@ -15,7 +18,7 @@ const CoursePage = () => {
   useEffect(() => {
     setFormData((prevdata) => {
       const newdata = { ...prevdata };
-      newdata.course_name = course_id;
+      newdata.course_name = course_title;
       return newdata;
     });
   }, [course_id]);
@@ -106,7 +109,12 @@ const CoursePage = () => {
             console.log(`affiliate found with id ${affiliate_id}`);
           } else console.log(`no affiliate`);
           // add form request
-          const e = await add_new_request(user._id, null, affiliate_id);
+          console.log({
+            "user_id": user._id,
+            course_id,
+            affiliate_id,
+          });
+          const e = await add_new_request(user._id, course_id, affiliate_id);
           if (e.error) {
             toast.error(e.error, {
               position: "top-right",
