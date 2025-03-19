@@ -347,12 +347,14 @@ details[open] summary::after {
   justify-content: center;
   align-items: center;
   font-size: 70px;
+  border-radius: 10px;  
 }
 
 .courses_container > .sigle_course > img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 10px;
 }
 
 /*  */
