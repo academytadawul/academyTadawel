@@ -2,7 +2,6 @@
 import { useEffect, useState } from "react";
 import { useGlobalContext } from "@/contexts/globalContext";
 import Link from "next/link";
-import { ToastContainer } from "react-toastify";
 export const Main = () => {
   const { filtered_tours, set_filtered_tours, set_tours, tours } =
     useGlobalContext();
@@ -39,7 +38,6 @@ export const Main = () => {
 
   return (
     <>
-      <ToastContainer />
       <div className="header_part_1_flag"></div>
       <div className="header_part_2">
         <img src="/tadawel.jpg" alt="" />

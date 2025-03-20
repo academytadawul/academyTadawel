@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { show_error_msg, show_successfull_msg } from "../../lib/helper/logger";
-
+import { ToastContainer } from "react-toastify";
 const Dashboard = () => {
   const getCreatorCount = async () => {
     const resjson = await fetch("/api/creator");
@@ -117,6 +117,7 @@ const Dashboard = () => {
   }, []);
   return (
     <section className="dashboard_container">
+      <ToastContainer />
       <section className="first_section">
         {data.map((value, index) => (
           <div className="data_section">

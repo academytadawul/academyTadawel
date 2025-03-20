@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { addUser, isUser } from "../../lib/models/sessionStorage";
 import { show_error_msg, show_successfull_msg } from "../../lib/helper/logger";
+import { ToastContainer } from "react-toastify";
 const Login = () => {
   const router = useRouter();
 
@@ -39,6 +40,7 @@ const Login = () => {
 
   return (
     <div className="login-container">
+      <ToastContainer />
       <form
         onSubmit={(e) => {
           e.preventDefault();
