@@ -347,7 +347,7 @@ details[open] summary::after {
   justify-content: center;
   align-items: center;
   font-size: 70px;
-  border-radius: 10px;  
+  border-radius: 10px;
 }
 
 .courses_container > .sigle_course > img {
@@ -465,7 +465,7 @@ button:hover {
 
 .second_section {
   display: grid;
-  grid-template-columns: 1.5fr 1.5fr 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 10px;
 }
 
@@ -516,6 +516,7 @@ button:hover {
 
 .data_section.one .table_item {
   font-size: 0.8rem;
+  padding: 0 10px 0 10px;
 }
 
 .second_section > .data_section > .table_heading {
@@ -538,8 +539,10 @@ button:hover {
   grid-template-columns: repeat(3, 1fr);
 }
 
-/* dashboard */
 @media (max-width: 1300px) {
+  .second_section {
+    grid-template-columns: 1fr;
+  }
   .courses_container {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -623,6 +626,9 @@ button:hover {
 }
 
 @media (max-width: 750px) {
+  .first_section {
+    grid-template-columns: repeat(2, 1fr);
+  }
   .header > .section_2 {
     display: none;
   }
@@ -717,9 +723,12 @@ button:hover {
 }
 
 @media (max-width: 550px) {
+  .dashboard_container {
+    margin: 5rem 1rem 0 1rem;
+  }
   .form-container {
     max-width: 250px;
-}
+  }
   .courses_container {
     grid-template-columns: repeat(1, 1fr);
   }

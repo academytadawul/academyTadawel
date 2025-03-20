@@ -1,5 +1,5 @@
-import { connectToDatabase } from "../../lib/db"; // MongoDB connection
-import { CustomerModel } from "../../lib/customerModel";
+import { connectToDatabase } from "../../lib/models/db"; // MongoDB connection
+import { CustomerModel } from "../../lib/models/customerModel";
 
 /**
  * API Route to handle customer (affiliate) operations:

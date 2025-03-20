@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { useGlobalContext } from "@/contexts/globalContext";
 import Link from "next/link";
+import { ToastContainer } from "react-toastify";
 export const Main = () => {
   const { filtered_tours, set_filtered_tours, set_tours, tours } =
     useGlobalContext();
@@ -38,6 +39,7 @@ export const Main = () => {
 
   return (
     <>
+      <ToastContainer />
       <div className="header_part_1_flag"></div>
       <div className="header_part_2">
         <img src="/tadawel.jpg" alt="" />
@@ -48,7 +50,7 @@ export const Main = () => {
             className="sigle_course"
             href={{
               pathname: `/course/${course_val._id ? course_val._id : null}`,
-              query: {course_title: course_val.title}
+              query: { course_title: course_val.title },
             }}
           >
             <img src="/tadawel_2.jpg" alt="tadawel image" />

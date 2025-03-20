@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ToastContainer, toast, Bounce } from "react-toastify";
+import { show_error_msg, show_successfull_msg } from "../../lib/helper/logger";
 
 const Dashboard = () => {
   const getCreatorCount = async () => {
@@ -117,7 +117,6 @@ const Dashboard = () => {
   }, []);
   return (
     <section className="dashboard_container">
-      <ToastContainer />
       <section className="first_section">
         {data.map((value, index) => (
           <div className="data_section">
@@ -154,15 +153,15 @@ const Dashboard = () => {
         <div className="data_section two">
           <h1 className="table_title">Total Requests</h1>
           <div className="table_heading">
-            <div>client username</div>
-            <div>creator username</div>
+            <div>client id</div>
+            <div>creator id</div>
             <div>course id</div>
           </div>
           {totalRequest.map((value) => (
             <div>
               <div className="table_item">{value.user_id}</div>
               <div className="table_item">{value.creator_id}</div>
-              <div className="table_item">{value.affiliate_id}</div>
+              <div className="table_item">{value.course_id}</div>
             </div>
           ))}
         </div>
@@ -181,43 +180,13 @@ const Dashboard = () => {
                 .then((e) => {
                   console.log({ e });
                   if (e.error) {
-                    toast.error(e.error, {
-                      position: "top-right",
-                      autoClose: 5000,
-                      hideProgressBar: false,
-                      closeOnClick: false,
-                      pauseOnHover: true,
-                      draggable: true,
-                      progress: undefined,
-                      theme: "light",
-                      transition: Bounce,
-                    });
+                    show_error_msg(e.error);
                   } else {
-                    toast.success("added affiliate successfully", {
-                      position: "top-right",
-                      autoClose: 2000,
-                      hideProgressBar: false,
-                      closeOnClick: false,
-                      pauseOnHover: true,
-                      draggable: true,
-                      progress: undefined,
-                      theme: "light",
-                      transition: Bounce,
-                    });
+                    show_successfull_msg("added affiliate successfully");
                   }
                 })
                 .catch((error) => {
-                  toast.error("Something went wrong!", {
-                    position: "top-right",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: false,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "light",
-                    transition: Bounce,
-                  });
+                  show_error_msg("Something went wrong!");
                 });
             }}
             action="#"

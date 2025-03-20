@@ -1,5 +1,5 @@
-import { connectToDatabase } from "../../lib/db"; // Your MongoDB connection function
-import { CourseModel } from "../../lib/courseModel";
+import { connectToDatabase } from "../../lib/models/db"; // Your MongoDB connection function
+import { CourseModel } from "../../lib/models/courseModel";
 
 /**
  * API Route to handle course operations:

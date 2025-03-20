@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { addUser, isUser } from "../../lib/sessionStorage";
+import { addUser, isUser } from "../../lib/models/sessionStorage";
+import { show_error_msg, show_successfull_msg } from "../../lib/helper/logger";
 const Login = () => {
   const router = useRouter();
 
@@ -32,6 +33,7 @@ const Login = () => {
     const user = isUser();
     if (user) {
       router.push("/dashboard");
+      show_successfull_msg("Login successfully");
     }
   }, []);
 
@@ -40,12 +42,23 @@ const Login = () => {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          checkAdmin(userData.email, userData.password).then((e) => {
-            if (!e.error) {
-              addUser(userData.email, userData.password);
-              router.push("/dashboard");
-            }
-          });
+          checkAdmin(userData.email, userData.password)
+            .then((e) => {
+              if (!e.error) {
+                addUser(userData.email, userData.password);
+                router.push("/dashboard");
+                show_successfull_msg("Login Successfully");
+              } else {
+                show_error_msg(e.error);
+              }
+            })
+            .catch((e) => {
+              if (!e.error) {
+                show_error_msg("Wrong Credentials");
+              } else {
+                show_error_msg(e.error);
+              }
+            });
         }}
       >
         <div className="input-group">

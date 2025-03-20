@@ -1,5 +1,5 @@
-import { connectToDatabase } from "../../lib/db"; // Your MongoDB connection function
-import { CreatorModel } from "../../lib/creatorModel";
+import { connectToDatabase } from "../../lib/models/db"; // Your MongoDB connection function
+import { CreatorModel } from "../../lib/models/creatorModel";
 
 /**
  * API Route to handle creator operations:
