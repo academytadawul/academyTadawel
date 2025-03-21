@@ -579,6 +579,12 @@ button:hover {
   gap: 2rem;
 }
 
+.form_header_title{
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+}
+
 @media (max-width: 1300px) {
   .second_section {
     grid-template-columns: 1fr;

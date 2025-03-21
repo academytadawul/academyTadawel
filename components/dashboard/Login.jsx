@@ -31,7 +31,7 @@ const Login = (props) => {
   useEffect(() => {
     const user = isUser(props.type);
     if (user) {
-      console.log(user)
+      console.log(user);
       if (props.type == "affiliate")
         router.push(`${props.routed_page}?id=${user._id}`);
       else {
@@ -45,6 +45,7 @@ const Login = (props) => {
     <div className="login-container">
       <ToastContainer />
       <CustomForm
+        form_header_title={props.type}
         onSubmit={async (form_event) => {
           form_event.preventDefault();
           const is_admin_event = await isAdmin(form_event);
