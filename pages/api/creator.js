@@ -42,21 +42,44 @@ export default async function handler(req, res) {
   }
 
   /** ------------------------------------------
+   * POST creator login to creator dashboard: `/api/creators`
+   * ----------------------------------------- */
+  if (req.method === "POST" && req.query.login) {
+    try {
+      const { email, password } = req.body;
+      if ((!email, !password)) {
+        return res
+          .status(400)
+          .json({ error: "email and password are required" });
+      }
+      const creator = await CreatorModel.findOne({
+        email: email,
+        password: password,
+      });
+      return res.status(201).json({ _id: creator._id, email: creator.email });
+    } catch (error) {
+      return res.status(500).json({ error: "wrong email or password" });
+    }
+  }
+
+  /** ------------------------------------------
    * POST Create Creator: `/api/creators`
    * ----------------------------------------- */
   if (req.method === "POST") {
     try {
-      const { username, email, startDate, endDate } = req.body;
-      if (!username || !email || !startDate || !endDate) {
+      const { username, email, startDate, endDate, password } = req.body;
+      if (!username || !email || !startDate || !password || !endDate) {
         return res.status(400).json({ error: "All fields are required" });
       }
       const newCreator = await CreatorModel.create({
         username,
         email,
         referred_users: [],
+        password,
         startDate,
         endDate,
       });
+      console.log({ newCreator });
       return res.status(201).json(newCreator);
     } catch (error) {
       return res.status(500).json({ error: "Failed to create creator" });
@@ -67,7 +90,7 @@ export default async function handler(req, res) {
    * PUT Update Creator: `/api/creators/:id`
    * ----------------------------------------- */
   if (req.method === "PUT" && req.query.id) {
-    const id = req.query.id
+    const id = req.query.id;
     try {
       const { username, email, startDate, endDate, customer_id } = req.body;
 
@@ -98,7 +121,7 @@ export default async function handler(req, res) {
    * DELETE Creator: `/api/creators/:id`
    * ----------------------------------------- */
   if (req.method === "DELETE" && req.query.id) {
-    const id = req.query.id
+    const id = req.query.id;
     try {
       const deletedCreator = await CreatorModel.findByIdAndDelete(id);
       if (!deletedCreator)

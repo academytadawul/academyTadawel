@@ -1,101 +1,79 @@
+"use client";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { addUser, isUser } from "../../lib/models/sessionStorage";
+import { isUser } from "../../lib/models/sessionStorage";
 import { show_error_msg, show_successfull_msg } from "../../lib/helper/logger";
 import { ToastContainer } from "react-toastify";
-const Login = () => {
+import CustomForm from "../form";
+const Login = (props) => {
   const router = useRouter();
-
   const [userData, setUserData] = useState({
     email: "",
     password: "",
   });
 
-  const checkAdmin = async (email, password) => {
-    const resjson = await fetch(`/api/user`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: email,
-        password: password,
-      }),
-    });
-    console.log({ resjson });
-    return resjson.json();
-  };
-
   const handleChange = (e) => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
   };
 
+  const isAdmin = async (e) => {
+    try {
+      return await props.checkAdmin(userData.email, userData.password);
+    } catch (error) {
+      if (!e.error) {
+        show_error_msg("Wrong Credentials");
+      } else {
+        show_error_msg(e.error);
+      }
+    }
+  };
+
   useEffect(() => {
-    const user = isUser();
+    const user = isUser(props.type);
     if (user) {
-      router.push("/dashboard");
+      console.log(user)
+      if (props.type == "affiliate")
+        router.push(`${props.routed_page}?id=${user._id}`);
+      else {
+        router.push(props.routed_page);
+      }
       show_successfull_msg("Login successfully");
     }
-  }, []);
+  }, [props.type, props.routed_page]);
 
   return (
     <div className="login-container">
       <ToastContainer />
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          checkAdmin(userData.email, userData.password)
-            .then((e) => {
-              if (!e.error) {
-                addUser(userData.email, userData.password);
-                router.push("/dashboard");
-                show_successfull_msg("Login Successfully");
-              } else {
-                show_error_msg(e.error);
-              }
-            })
-            .catch((e) => {
-              if (!e.error) {
-                show_error_msg("Wrong Credentials");
-              } else {
-                show_error_msg(e.error);
-              }
-            });
+      <CustomForm
+        onSubmit={async (form_event) => {
+          form_event.preventDefault();
+          const is_admin_event = await isAdmin(form_event);
+          console.log({ is_admin_event });
+          props.toDoNext(is_admin_event, userData, router);
         }}
-      >
-        <div className="input-group">
-          <label for="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="Enter your email"
-            value={userData.email}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div className="input-group">
-          <label for="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={userData.password}
-            placeholder="Enter your password"
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div className="checkbox-group">
-          <input type="checkbox" id="terms" name="terms" required />
-          <label for="terms">I agree to the terms and conditions</label>
-        </div>
-
-        <button type="submit">Register</button>
-      </form>
+        showTermsAndConditions={true}
+        formData={userData}
+        setFormData={setUserData}
+        handleChange={handleChange}
+        formDataelements={[
+          {
+            type: "email",
+            id: "email",
+            placeholder: "Enter your email",
+            readOnly: false,
+            required: true,
+            label: "Email",
+          },
+          {
+            type: "password",
+            id: "password",
+            placeholder: "Enter your password",
+            readOnly: false,
+            required: true,
+            label: "Password",
+          },
+        ]}
+      />
     </div>
   );
 };

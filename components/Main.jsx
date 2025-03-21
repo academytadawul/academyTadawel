@@ -1,25 +1,27 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useGlobalContext } from "@/contexts/globalContext";
 import Link from "next/link";
-export const Main = () => {
-  const { filtered_tours, set_filtered_tours, set_tours, tours } =
-    useGlobalContext();
-  const [all_courses, set_all_courses] = useState([]);
+import CustomForm from "../components/form";
+import { submit_form } from "../lib/helper/form_submissions";
+import { useRouter } from "next/router";
 
+export const Main = () => {
+  const router = useRouter();
+  const { affiliate_id } = router.query;
+  const [all_courses, set_all_courses] = useState([]);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phonenumber: "",
+  });
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
   const getAllCources = async () => {
     const resjson = await fetch("/api/course");
     return await resjson.json();
   };
-  const getAllCreators = async () => {
-    const resjson = await fetch("/api/creator");
-    return await resjson.json();
-  };
   useEffect(() => {
-    set_filtered_tours();
-    // set_tours(props.tours);
-    console.log({ filtered_tours });
-    window.scrollTo(0, 0);
     // get all courses
     (async () => {
       const courses = await getAllCources();
@@ -28,11 +30,6 @@ export const Main = () => {
         set_all_courses(courses);
       }
       console.log({ courses });
-    })();
-    (async () => {
-      const creators = await getAllCreators();
-      console.log("res");
-      console.log({ creators });
     })();
   }, []);
 
@@ -62,6 +59,44 @@ export const Main = () => {
         <img alt="" />
         <img alt="" />
         <img className="last" alt="" />
+      </div>
+      <div className="contact_container">
+        <div className="contact_header">Request Custom Plan</div>
+        <CustomForm
+          onSubmit={(form_event) => {
+            submit_form(formData, form_event, "", affiliate_id);
+          }}
+          formData={formData}
+          setFormData={setFormData}
+          handleChange={handleChange}
+          formDataelements={[
+            {
+              type: "text",
+              id: "name",
+              placeholder: "Enter your full name",
+              readOnly: false,
+              required: true,
+              label: "Full Name",
+            },
+
+            {
+              type: "email",
+              id: "email",
+              placeholder: "Enter your email",
+              readOnly: false,
+              required: true,
+              label: "Email",
+            },
+            {
+              type: "number",
+              id: "phonenumber",
+              placeholder: "Enter your WhatsApp Number",
+              readOnly: false,
+              required: true,
+              label: "WhatsApp PhoneNumber",
+            },
+          ]}
+        />
       </div>
     </>
   );

@@ -1,20 +1,15 @@
+"use client";
 import React, { useEffect, useState } from "react";
 import { show_error_msg, show_successfull_msg } from "../../lib/helper/logger";
 import { ToastContainer } from "react-toastify";
+import {
+  addNewCreator,
+  getTotalCreators,
+  getTotalRequests,
+  getCreatorCount,
+  getRequestsCount,
+} from "../../lib/helper/db";
 const Dashboard = () => {
-  const getCreatorCount = async () => {
-    const resjson = await fetch("/api/creator");
-    const res = await resjson.json();
-    if (!res.error) return res.length;
-    else return -1;
-  };
-  const getRequestsCount = async () => {
-    const resjson = await fetch("/api/request");
-    const res = await resjson.json();
-    if (!res.error) return res.length;
-    else return -1;
-  };
-
   const [data, setData] = useState([
     {
       left: "creators",
@@ -46,44 +41,14 @@ const Dashboard = () => {
     endDate: "",
   });
 
-  const [totalCreators, setTotalCreators] = useState([]);
-
-  const [totalRequest, setTotalRequests] = useState([]);
-
   const updateNewAffiliate = (e) => {
     setNewAffiliate({ ...newAffiliate, [e.target.name]: e.target.value });
   };
+  
 
-  const addNewCreator = async (
-    username,
-    email,
-    password,
-    startDate,
-    endDate
-  ) => {
-    const resjson = await fetch("/api/creator", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        username,
-        email,
-        password,
-        startDate,
-        endDate,
-      }),
-    });
-    return await resjson.json();
-  };
+  const [totalCreators, setTotalCreators] = useState([]);
 
-  const getTotalCreators = async () => {
-    const resjson = await fetch("/api/creator");
-    return await resjson.json();
-  };
-
-  const getTotalRequests = async () => {
-    const resjson = await fetch("/api/request");
-    return await resjson.json();
-  };
+  const [totalRequest, setTotalRequests] = useState([]);
 
   useEffect(() => {
     (async () => {
