@@ -44,7 +44,6 @@ const Dashboard = () => {
   const updateNewAffiliate = (e) => {
     setNewAffiliate({ ...newAffiliate, [e.target.name]: e.target.value });
   };
-  
 
   const [totalCreators, setTotalCreators] = useState([]);
 
@@ -52,25 +51,23 @@ const Dashboard = () => {
 
   useEffect(() => {
     (async () => {
-      // creators count
-      const creatorscount = await getCreatorCount();
+      const promise_list = [
+        getCreatorCount(),
+        getRequestsCount(),
+        getTotalCreators(),
+      ];
+      const promise_list_res = await Promise.all(promise_list);
+      const creatorscount = promise_list_res[0];
+      const requestscount = promise_list_res[1];
+      const total_creators = promise_list_res[2];
       setData((oldata) => {
         const copy = [...oldata];
         copy[0].value = creatorscount;
-        return copy;
-      });
-      //clients count
-      const requestscount = await getRequestsCount();
-      setData((oldata) => {
-        const copy = [...oldata];
         copy[1].value = requestscount;
         return copy;
       });
-      // total creators
-      const total_creators = await getTotalCreators();
       if (!total_creators.error) {
         setTotalCreators(total_creators);
-        console.log({ total_creators });
       }
       // total requests
       const total_requests = await getTotalRequests();

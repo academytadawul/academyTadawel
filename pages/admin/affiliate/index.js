@@ -23,7 +23,6 @@ const AffiateAdmin = () => {
   const toDoNext = (e, userData, router) => {
     if (!e.error) {
       addUser(e._id, userData.email, userData.password, 'affiliate');
-      console.log(e)
       router.push(`/dashboard/affiliate?id=${e._id}`);
       show_successfull_msg("Login Successfully");
     } else {
