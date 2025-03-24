@@ -24,7 +24,7 @@ const CoursePage = () => {
     setFormData((prevdata) => {
       const newdata = { ...prevdata };
       newdata.course_name = course_title;
-      console.log({newdata})
+      console.log({ newdata });
       return newdata;
     });
   }, [course_id]);
@@ -35,6 +35,7 @@ const CoursePage = () => {
         onSubmit={(e) => {
           submit_form(formData, e, course_id, affiliate_id);
         }}
+        form_header_title={""}
         showTermsAndConditions={false}
         courseName={course_id}
         formData={formData}

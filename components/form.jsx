@@ -4,7 +4,7 @@ import React from "react";
 const CustomForm = (props) => {
   return (
     <div className="form-container">
-      <div className="form_header_title">{`${props.form_header_title} login`}</div>
+      <div className="form_header_title">{`${props.form_header_title}`}</div>
       <form onSubmit={props.onSubmit}>
         {props.formDataelements.map((field_vals, ind) => (
           <div className="input-group">

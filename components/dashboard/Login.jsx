@@ -32,9 +32,10 @@ const Login = (props) => {
     const user = isUser(props.type);
     if (user) {
       console.log(user);
-      if (props.type == "affiliate")
-        router.push(`${props.routed_page}?id=${user._id}`);
-      else {
+      if (props.type == "affiliate") {
+        router.push(`${props.routed_page}?id=${user.id}`);
+        console.log({user});
+      } else {
         router.push(props.routed_page);
       }
       show_successfull_msg("Login successfully");
@@ -45,7 +46,7 @@ const Login = (props) => {
     <div className="login-container">
       <ToastContainer />
       <CustomForm
-        form_header_title={props.type}
+        form_header_title={`${props.type} login`}
         onSubmit={async (form_event) => {
           form_event.preventDefault();
           const is_admin_event = await isAdmin(form_event);

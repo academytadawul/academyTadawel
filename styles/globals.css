@@ -372,8 +372,8 @@ details[open] summary::after {
 
 .form-container {
   margin: auto;
-  margin-top: 100px;
-  max-width: 400px;
+  min-width: 300px;
+  width: 500px;
   text-align: center;
 }
 
@@ -449,6 +449,46 @@ button:hover {
   grid-template-columns: repeat(4, 1fr);
   gap: 10px;
   margin-bottom: 1.2rem;
+}
+
+.affiliate_dashboard_container > .data_section {
+  display: grid;
+  padding-top: 100px;
+  grid-template-columns: 1fr 1fr;
+}
+
+.text-fields-container {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 19px;
+}
+
+.data_section > .text-fields-container > .url-container {
+  position: relative;
+}
+
+.data_section > .text-fields-container > .url-container input {
+  border-radius: 7px;
+  border: 0.5px solid #353535;
+  width: 500px;
+  padding: 16px 10px;
+  font-size: 14px;
+}
+.text-fields-container h1{
+  margin: auto;
+}
+
+.text-fields-container button{
+  width: 200px;
+  margin: auto;
+}
+
+.data_section > .text-fields-container > .url-container i {
+  position: absolute;
+  right: 10px;
+  bottom: 25%;
+  font-size: 25px;
 }
 
 .first_section > .data_section {
@@ -579,13 +619,17 @@ button:hover {
   gap: 2rem;
 }
 
-.form_header_title{
+.form_header_title {
   font-size: 1.6rem;
   font-weight: 600;
   margin-bottom: 2rem;
 }
 
 @media (max-width: 1300px) {
+  .data_section {
+    grid-template-columns:1fr;
+    gap: 42px;
+  }
   .second_section {
     grid-template-columns: 1fr;
   }
@@ -677,6 +721,9 @@ button:hover {
 }
 
 @media (max-width: 750px) {
+  .data_section > .text-fields-container > .url-container input {
+    width: 350px;
+  }
   .first_section {
     grid-template-columns: repeat(2, 1fr);
   }

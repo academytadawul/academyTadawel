@@ -64,8 +64,9 @@ export const Main = () => {
         <div className="contact_header">Request Custom Plan</div>
         <CustomForm
           onSubmit={(form_event) => {
-            submit_form(formData, form_event, "", affiliate_id);
+            submit_form(formData, form_event, undefined, affiliate_id);
           }}
+          form_header_title={""}
           formData={formData}
           setFormData={setFormData}
           handleChange={handleChange}
