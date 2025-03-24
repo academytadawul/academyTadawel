@@ -92,7 +92,8 @@ export default async function handler(req, res) {
   if (req.method === "PUT" && req.query.id) {
     const id = req.query.id;
     try {
-      const { username, email, startDate, endDate, customer_id } = req.body;
+      const { username, email, password, startDate, endDate, customer_id } =
+        req.body;
 
       let updatedCreator;
 
@@ -107,7 +108,7 @@ export default async function handler(req, res) {
         // Update other fields
         updatedCreator = await CreatorModel.findByIdAndUpdate(
           id,
-          { username, email, startDate, endDate },
+          { username, email, password, startDate, endDate },
           { new: true }
         );
       }

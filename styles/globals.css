@@ -50,10 +50,6 @@ img {
   justify-content: center;
 }
 
-.login-container .input-group {
-  width: 400px;
-}
-
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
@@ -475,11 +471,11 @@ button:hover {
   padding: 16px 10px;
   font-size: 14px;
 }
-.text-fields-container h1{
+.text-fields-container h1 {
   margin: auto;
 }
 
-.text-fields-container button{
+.text-fields-container button {
   width: 200px;
   margin: auto;
 }
@@ -626,8 +622,8 @@ button:hover {
 }
 
 @media (max-width: 1300px) {
-  .data_section {
-    grid-template-columns:1fr;
+  .affiliate_dashboard_container > .data_section {
+    grid-template-columns: 1fr;
     gap: 42px;
   }
   .second_section {

@@ -2,7 +2,11 @@
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { ToastContainer } from "react-toastify";
-import { get_creator, getRequestsCountForUser } from "../../../lib/helper/db";
+import {
+  get_creator,
+  getRequestsCountForUser,
+  updateCreatorCred,
+} from "../../../lib/helper/db";
 import {
   show_successfull_msg,
   show_error_msg,
@@ -146,8 +150,14 @@ const AffiliateDashboard = () => {
                 </div>
                 <div className="btns_container">
                   <button
-                    onClick={() => {
+                    onClick={async () => {
                       set_input_readonly(true);
+                      const updateCreatorCred_res = await updateCreatorCred(
+                        id,
+                        formData.email,
+                        formData.password
+                      );
+                      console.log({ updateCreatorCred_res });
                     }}
                     type="submit"
                   >
