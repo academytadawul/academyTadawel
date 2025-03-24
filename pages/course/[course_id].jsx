@@ -31,6 +31,7 @@ const CoursePage = () => {
   return (
     <>
       <ToastContainer />
+      <div style={{marginTop: "4%"}}></div>
       <CustomForm
         onSubmit={(e) => {
           submit_form(formData, e, course_id, affiliate_id);
