@@ -1,6 +1,6 @@
 "use client";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { cloneElement, useEffect, useState } from "react";
 import { ToastContainer } from "react-toastify";
 import {
   get_creator,
@@ -65,7 +65,10 @@ const AffiliateDashboard = () => {
         password: creator.password,
       });
       // add form submitions count for user
-      const requestsCountForUser = await getRequestsCountForUser();
+      const requestsCountForUser = await getRequestsCountForUser(id);
+      const clone_data = [...data];
+      clone_data[0].value = requestsCountForUser.length;
+      setData(clone_data);
     })();
   }, [id]);
 
