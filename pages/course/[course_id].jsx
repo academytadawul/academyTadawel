@@ -1,10 +1,8 @@
 "use client";
 import { useRouter } from "next/router";
-import CustomForm from "../../components/form";
 import { useEffect, useState } from "react";
-import { ToastContainer } from "react-toastify";
 import { submit_form } from "../../lib/helper/form_submissions";
-
+import ContactUs from "../../components/contact_us";
 const CoursePage = () => {
   const router = useRouter();
   const { course_id, affiliate_id, course_title } = router.query;
@@ -30,15 +28,11 @@ const CoursePage = () => {
   }, [course_id]);
   return (
     <>
-      <ToastContainer />
-      <div style={{marginTop: "4%"}}></div>
-      <CustomForm
+      <ContactUs
         onSubmit={(e) => {
           submit_form(formData, e, course_id, affiliate_id);
         }}
         form_header_title={""}
-        showTermsAndConditions={false}
-        courseName={course_id}
         formData={formData}
         setFormData={setFormData}
         handleChange={handleChange}

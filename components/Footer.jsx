@@ -10,13 +10,26 @@ export const Footer = () => {
         </section>
         <section className="section2">
           <section>
-            <a>Services</a>
+            <a>تابعنا</a>
           </section>
           <section>
-            <a>Legal</a>
+            <a>تواصل معنا </a>
+            <div href={"#"}>
+              <span>Email:</span>
+              <span>info@academytadawul.com</span>
+              <span>:البريد الإلكتروني</span>
+            </div>
+            <div >
+              <span>Phone:</span>
+              <span>+966-xx-xxxxxxx</span>
+              <span>:رقم الهاتف</span>
+            </div>
           </section>
           <section>
-            <a>Helpful Links</a>
+            <a>روابط سريعة</a>
+            <Link href={"/courses"}>الدورات</Link>
+            <Link href={"/about"}>عن الأكاديمية</Link>
+            <Link href={"/contact"}>اتصل بنا</Link>
           </section>
         </section>
       </div>
