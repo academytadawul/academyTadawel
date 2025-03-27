@@ -1,6 +1,7 @@
+import Link from "next/link";
 import React from "react";
 
-const Course = ({imgurl, sec2, sec3, sec4, on_submit}) => {
+const Course = ({ imgurl, title, sec3, sec4, course_id }) => {
   return (
     <>
       <div className="course_main_container">
@@ -8,10 +9,8 @@ const Course = ({imgurl, sec2, sec3, sec4, on_submit}) => {
           <img src={imgurl} alt="" />
         </div>
         <div className="container">
-          <div className="section2">{sec2}</div>
-          <div className="section3">
-            {sec3}
-          </div>
+          <div className="section2">{title}</div>
+          <div className="section3">{sec3}</div>
           <div className="section4">
             <div className="time">
               <span>{sec4.type}</span>
@@ -20,27 +19,10 @@ const Course = ({imgurl, sec2, sec3, sec4, on_submit}) => {
             <i class="bx bx-time"></i>
           </div>
           <div className="section4">
-            <button onClick={
-                () => {
-                    
-                }
-            }>سجل الان</button>
+            <Link href={`https://academytadawul.com/course/${course_id}?course_title=${title}`}>سجل الان</Link>
           </div>
         </div>
       </div>
-      {/* <div className="courses_container">
-        {all_courses.map((course_val, index) => (
-          <Link
-            className="sigle_course"
-            href={{
-              pathname: `/course/${course_val._id ? course_val._id : null}`,
-              query: { course_title: course_val.title },
-            }}
-          >
-            <img src="/tadawel_2.jpg" alt="tadawel image" />
-          </Link>
-        ))}
-      </div> */}
     </>
   );
 };

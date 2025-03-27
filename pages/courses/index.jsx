@@ -17,40 +17,14 @@ const Courses = () => {
       console.log({ courses });
     })();
   }, []);
-  const data = [
-    {
-      imgurl: "/asset1.jpeg",
-      sec2: "التحليل الفني المتقدم",
-      sec3: "دورة متقدمة في التحليل الفني وقراءة الرسوم البيانية",
-      sec4: { count: 15, type: "أسبوع" },
-    },
-    {
-      imgurl: "/asset1.jpeg",
-      sec2: "التحليل الفني المتقدم",
-      sec3: "دورة متقدمة في التحليل الفني وقراءة الرسوم البيانية",
-      sec4: { count: 15, type: "أسبوع" },
-    },
-    {
-      imgurl: "/asset1.jpeg",
-      sec2: "التحليل الفني المتقدم",
-      sec3: "دورة متقدمة في التحليل الفني وقراءة الرسوم البيانية",
-      sec4: { count: 15, type: "أسبوع" },
-    },
-    {
-      imgurl: "/asset1.jpeg",
-      sec2: "التحليل الفني المتقدم",
-      sec3: "دورة متقدمة في التحليل الفني وقراءة الرسوم البيانية",
-      sec4: { count: 15, type: "أسبوع" },
-    },
-  ];
   return (
     <>
       <div className="courses_container">
         {all_courses.map((dataitem) => (
           <Course
-            on_submit={""}
+            course_id={dataitem._id}
             imgurl={"/asset1.jpeg" }
-            sec2={dataitem.title}
+            title={dataitem.title}
             sec3={dataitem.description}
             sec4={{
               count: dataitem.duration.count,
