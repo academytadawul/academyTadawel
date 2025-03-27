@@ -1,7 +1,22 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import Course from "../../components/Course";
+import { getAllCourses } from "../../lib/helper/db";
 
 const Courses = () => {
+  const [all_courses, set_all_courses] = useState([]);
+
+  useEffect(() => {
+    // get all courses
+    (async () => {
+      const courses = await getAllCourses();
+      console.log("res");
+      if (!courses.error) {
+        set_all_courses(courses);
+      }
+      console.log({ courses });
+    })();
+  }, []);
   const data = [
     {
       imgurl: "/asset1.jpeg",
@@ -31,12 +46,16 @@ const Courses = () => {
   return (
     <>
       <div className="courses_container">
-        {data.map((dataitem) => (
+        {all_courses.map((dataitem) => (
           <Course
-            imgurl={dataitem.imgurl}
-            sec2={dataitem.sec2}
-            sec3={dataitem.sec3}
-            sec4={{ count: dataitem.sec4.count, type: dataitem.sec4.type }}
+            on_submit={""}
+            imgurl={"/asset1.jpeg" }
+            sec2={dataitem.title}
+            sec3={dataitem.description}
+            sec4={{
+              count: dataitem.duration.count,
+              type: dataitem.duration.type,
+            }}
           />
         ))}
       </div>

@@ -31,13 +31,26 @@ export default async function handler(req, res) {
    * ----------------------------------------- */
   if (req.method === "POST") {
     try {
-      const { title, description } = req.body;
-      if (!title || !description) {
-        return res.status(400).json({ error: "All fields are required" });
+      const { title, description, duration, imgUrl } = req.body;
+
+      // Validate required fields
+      if (!title || !description || !duration?.type || !duration?.count || !imgUrl) {
+        return res
+          .status(400)
+          .json({ error: "All fields are required" });
       }
-      const newCourse = await CourseModel.create({ name, title, description });
+
+      // Create a new course
+      const newCourse = await CourseModel.create({
+        title,
+        description,
+        duration,
+        imgUrl
+      });
+
       return res.status(201).json(newCourse);
     } catch (error) {
+      console.error("Error creating course:", error);
       return res.status(500).json({ error: "Failed to create course" });
     }
   }

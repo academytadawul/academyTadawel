@@ -11,7 +11,6 @@ import Item1 from "../components/Item1";
 export const Main = () => {
   const router = useRouter();
   const { affiliate_id } = router.query;
-  const [all_courses, set_all_courses] = useState([]);
   const getAllCources = async () => {
     const resjson = await fetch("/api/course");
     return await resjson.json();
@@ -24,17 +23,7 @@ export const Main = () => {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-  useEffect(() => {
-    // get all courses
-    (async () => {
-      const courses = await getAllCources();
-      console.log("res");
-      if (!courses.error) {
-        set_all_courses(courses);
-      }
-      console.log({ courses });
-    })();
-  }, []);
+
 
   return (
     <>

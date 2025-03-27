@@ -38,6 +38,7 @@ const Dashboard = () => {
     email: "",
     password: "",
     startDate: "",
+    pay_rate: 0,
     endDate: "",
   });
 
@@ -138,10 +139,10 @@ const Dashboard = () => {
                 newAffiliate.email,
                 newAffiliate.password,
                 newAffiliate.startDate,
-                newAffiliate.endDate
+                newAffiliate.endDate,
+                newAffiliate.pay_rate
               )
                 .then((e) => {
-                  console.log({ e });
                   if (e.error) {
                     show_error_msg(e.error);
                   } else {
@@ -174,6 +175,17 @@ const Dashboard = () => {
                 name="email"
                 id="email"
                 required
+              />
+            </div>
+            <div className="input_field">
+              <label htmlFor="pay_rate">Pay Rate: </label>
+              <input
+                required
+                onChange={updateNewAffiliate}
+                value={newAffiliate.pay_rate}
+                type="number"
+                name="pay_rate"
+                id="pay_rate"
               />
             </div>
             <div className="input_field">

@@ -67,8 +67,16 @@ export default async function handler(req, res) {
    * ----------------------------------------- */
   if (req.method === "POST") {
     try {
-      const { username, email, startDate, endDate, password } = req.body;
-      if (!username || !email || !startDate || !password || !endDate) {
+      const { username, email, pay_rate, startDate, endDate, password } =
+        req.body;
+      if (
+        !username ||
+        !email ||
+        !pay_rate ||
+        !startDate ||
+        !password ||
+        !endDate
+      ) {
         return res.status(400).json({ error: "All fields are required" });
       }
       const newCreator = await CreatorModel.create({
@@ -76,10 +84,10 @@ export default async function handler(req, res) {
         email,
         referred_users: [],
         password,
+        pay_rate,
         startDate,
         endDate,
       });
-      console.log({ newCreator });
       return res.status(201).json(newCreator);
     } catch (error) {
       return res.status(500).json({ error: "Failed to create creator" });

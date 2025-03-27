@@ -1,11 +1,11 @@
 import React from "react";
 
-const Course = ({imgurl, sec2, sec3, sec4}) => {
+const Course = ({imgurl, sec2, sec3, sec4, on_submit}) => {
   return (
     <>
       <div className="course_main_container">
         <div className="section1">
-          <img src="/asset1.jpeg" alt="" />
+          <img src={imgurl} alt="" />
         </div>
         <div className="container">
           <div className="section2">{sec2}</div>

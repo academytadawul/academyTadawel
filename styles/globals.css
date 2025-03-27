@@ -49,8 +49,6 @@ img {
 .login-container {
   display: flex;
   margin-top: 2rem;
-  height: 100vh;
-  align-items: center;
   justify-content: center;
 }
 
@@ -832,6 +830,9 @@ button:hover {
 }
 /*  */
 @media (max-width: 1300px) {
+  .dashboard_container .second_section {
+    grid-template-columns: 1fr;
+}
   .affiliate_dashboard_container > .data_section {
     grid-template-columns: 1fr;
     gap: 42px;
@@ -1124,6 +1125,9 @@ button:hover {
 }
 
 @media (max-width: 370px) {
+  .first_section {
+    grid-template-columns: repeat(1, 1fr);
+}
   .contact_container > .content {
     width: 278px;
   }
