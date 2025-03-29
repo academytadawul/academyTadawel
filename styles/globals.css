@@ -74,7 +74,7 @@ input[type="number"]::-webkit-outer-spin-button {
 .header_part_1 {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  padding: 0 1rem;
+  padding: 0 3rem;
   gap: 10px;
   margin: 5rem 0;
 }
@@ -87,6 +87,7 @@ input[type="number"]::-webkit-outer-spin-button {
   text-align: end;
   justify-content: center;
   color: white;
+  margin: 1rem 0;
 }
 .header_part_1 .header_part1_right .part1 {
   font-size: 3rem;
@@ -134,7 +135,6 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .header_part_2 {
   width: 100%;
-  margin-bottom: 7rem;
   position: relative;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -799,7 +799,7 @@ button:hover {
 /* about */
 .about_part1_left {
   width: 600px;
-  height: 300px;
+  height: 400px;
 }
 
 .about_part1_left img {
