@@ -842,7 +842,7 @@ button:hover {
 @media (max-width: 1300px) {
   .dashboard_container .second_section {
     grid-template-columns: 1fr;
-}
+  }
   .affiliate_dashboard_container > .data_section {
     grid-template-columns: 1fr;
     gap: 42px;
@@ -948,7 +948,7 @@ button:hover {
   .tour_container_phone {
     display: none;
   }
-  .header > .section_2_phone {
+  .section_2_phone_btn {
     display: none;
   }
   .schedule.phone {
@@ -977,11 +977,28 @@ button:hover {
   .header > .section_2.phone {
     display: flex;
   }
-  .header > .section_2_phone {
+  .section_2_phone_btn {
     display: block;
     width: 30px;
+  }
+  .section_2_phone {
+    display: none;
+    justify-content: center;
+    gap: 7%;
+    font-size: 13px;
+    text-align: center;
+    margin-top: 1rem;
+  }
+  .section_2_phone:hover {
     cursor: pointer;
   }
+
+  .section_2_phone > div:hover {
+    background-color: #00000014;
+    padding: 4px;
+    border-radius: 10px;
+    width: 68px;
+}
   .tour_container_phone {
     display: flex;
   }
@@ -1137,7 +1154,7 @@ button:hover {
 @media (max-width: 370px) {
   .first_section {
     grid-template-columns: repeat(1, 1fr);
-}
+  }
   .contact_container > .content {
     width: 278px;
   }
