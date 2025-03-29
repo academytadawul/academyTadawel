@@ -998,7 +998,7 @@ button:hover {
     padding: 4px;
     border-radius: 10px;
     width: 68px;
-}
+  }
   .tour_container_phone {
     display: flex;
   }
@@ -1082,6 +1082,12 @@ button:hover {
 }
 
 @media (max-width: 550px) {
+  .course_main_container {
+    width: 99%;
+  }
+  .course_main_container .section3 {
+    font-size: 14px;
+  }
   .contact_container .form-container {
     width: 300px;
   }
