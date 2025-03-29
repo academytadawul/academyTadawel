@@ -12,6 +12,9 @@ import {
   show_error_msg,
 } from "../../../lib/helper/logger";
 const AffiliateDashboard = () => {
+  useEffect(() => {
+    document.body.style.background = "white";
+  }, []);
   const router = useRouter();
   const { id } = router.query;
   const [data, setData] = useState([

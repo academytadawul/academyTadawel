@@ -11,10 +11,6 @@ import Item1 from "../components/Item1";
 export const Main = () => {
   const router = useRouter();
   const { affiliate_id } = router.query;
-  const getAllCources = async () => {
-    const resjson = await fetch("/api/course");
-    return await resjson.json();
-  };
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -23,8 +19,6 @@ export const Main = () => {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
-
   return (
     <>
       <HorizontalGrid
@@ -59,7 +53,7 @@ export const Main = () => {
           text2={"تدرب على يد نخبة من خبراء السوق المالي"}
         />
         <Item1
-          icon={<i class='bx bx-line-chart' ></i>}
+          icon={<i class="bx bx-line-chart"></i>}
           text1={"تحليل متقدم"}
           text2={"تعلم أحدث تقنيات التحليل الفني والأساسي"}
         />

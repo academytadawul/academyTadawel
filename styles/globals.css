@@ -10,6 +10,10 @@ body {
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   background-color: black;
 }
+
+body.white_mode {
+  background-color: white;
+}
 :root {
   --items-count: 3;
   --color-lightgrey: rgba(0, 0, 0, 0.75);
@@ -455,6 +459,7 @@ h2 {
 
 .input-group label {
   display: block;
+  color: white;
   font-weight: 600;
   margin-bottom: 5px;
 }
@@ -481,6 +486,7 @@ h2 {
   align-items: center;
   font-size: 14px;
   margin-bottom: 15px;
+  color: rgba(255, 255, 255, 0.718);
 }
 
 .checkbox-group input {
@@ -658,7 +664,7 @@ button:hover {
 }
 
 .contact_container {
-  margin-bottom: 7rem;
+  margin: 7rem 0;
   color: white;
 }
 
@@ -705,6 +711,7 @@ button:hover {
   font-size: 1.6rem;
   font-weight: 600;
   margin-bottom: 2rem;
+  color: white;
 }
 
 /* course */

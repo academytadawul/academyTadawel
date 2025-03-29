@@ -10,6 +10,10 @@ import {
   getRequestsCount,
 } from "../../lib/helper/db";
 const Dashboard = () => {
+
+  useEffect(() => {
+    document.body.style.background = "white";
+  }, []);
   const [data, setData] = useState([
     {
       left: "creators",
