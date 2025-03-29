@@ -8,6 +8,7 @@ body {
   list-style: none;
   overflow-x: clip;
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  background-color: black;
 }
 :root {
   --items-count: 3;
@@ -16,10 +17,10 @@ body {
   --color-darkred: #8e002f;
   --color-lightblue: rgb(59 130 246);
   --color-darkblue: #2335f9;
-  --color-gold: darkorange;
+  --color-gold: rgb(197 165 114);
 }
 ._gold_ {
-  color: var(--color-gold);
+  color: rgb(197 165 114);
 }
 
 button:disabled {
@@ -85,6 +86,7 @@ input[type="number"]::-webkit-outer-spin-button {
   align-items: end;
   text-align: end;
   justify-content: center;
+  color: white;
 }
 .header_part_1 .header_part1_right .part1 {
   font-size: 3rem;
@@ -126,6 +128,7 @@ input[type="number"]::-webkit-outer-spin-button {
   flex-direction: column;
   align-items: center;
   gap: 1rem;
+  color: whitesmoke;
 }
 
 .header_part_2 {
@@ -138,8 +141,8 @@ input[type="number"]::-webkit-outer-spin-button {
 .header_part_2 .item1_container .icon {
   border-radius: 50%;
   padding: 11px;
-  background-color: whitesmoke;
-  color: darkorange;
+  background-color: rgb(255 255 255 / 11%);
+  color: var(--color-gold);
   text-align: center;
   font-size: 63px;
   display: flex;
@@ -161,7 +164,7 @@ div.header {
   top: 0;
   z-index: 1;
   padding: 20px 0;
-  background-color: rgba(255, 255, 255, 0.573);
+  background-color: black;
   color: rgb(75 75 75);
 }
 
@@ -180,14 +183,14 @@ div.header {
 
 .header > .section_1 > .heading {
   text-align: center;
-  color: black;
+  color: var(--color-gold);
   font-size: 1.5rem;
   font-weight: 600;
   line-height: 16px;
 }
 
 .header > .section_1 > .heading > .heading_inner_text {
-  color: rgba(60, 60, 60, 0.704);
+  color: var(--color-gold);
   font-size: 1rem;
   font-family: "Caveat", serif;
   font-weight: 200;
@@ -199,7 +202,7 @@ div.header {
   color: rgba(0, 0, 0, 0.75);
 }
 .header > .section_2 > a:hover {
-  color: black;
+  color: rgba(255, 255, 255, 0.407);
 }
 
 .header > .section_2.phone {
@@ -220,6 +223,8 @@ div.header {
 .header section a {
   transition: ease-in-out;
   font-size: 1rem;
+  color: whitesmoke;
+  font-weight: 600;
 }
 
 /* Inner Header 1 */
@@ -299,7 +304,7 @@ div.header {
 }
 
 .footer section a:first-of-type {
-  color: black;
+  color: white;
   font-weight: 700;
 }
 
@@ -324,6 +329,7 @@ div.header {
 }
 
 .footer .section2 > section {
+  color: rgba(255, 255, 255, 0.389);
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -652,6 +658,7 @@ button:hover {
 
 .contact_container {
   margin-bottom: 7rem;
+  color: white;
 }
 
 .contact_container .contact_header1 {
